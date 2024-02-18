@@ -1,0 +1,100 @@
+import React, { useState } from 'react'
+import axios from 'axios'
+function WebsitePost() {
+    const [data,setData]=useState({
+        title:'',
+        price:"",
+        type:''
+    })
+    const [file, setFile] = useState(null);
+    const [previewUrl, setPreviewUrl] = useState('');
+
+   const handleData =(dt,type)=>{
+     setData(prev =>{
+      return({
+      ...prev,
+      [type]:dt
+     })})
+   }
+    const handleFileChange = (event) => {
+      const selectedFile = event.target.files[0];
+      setFile(selectedFile);
+  
+      // Preview the selected file
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      if (selectedFile) {
+        reader.readAsDataURL(selectedFile);
+      }
+    };
+    const send = ()=>{
+      axios.post ('http://localhost:8800/api/user/images',{
+        imgData:previewUrl
+      }).then(res =>{
+        axios.post('http://localhost:8800/api/user/post',{
+          imgUrl:res.data.url,
+          ...data
+          
+        }).then(()=>{console.log('done');}).catch(()=>{console.log('error');})
+      }).catch(()=>{console.log('error');})
+    }
+    return (
+      <>
+      <div className='main flex data-area with-gap'>
+          <div className='addImg mediaBox'>
+            {!previewUrl && <>
+              <label className='addImg--icon' htmlFor={'dt'}><h1>+</h1></label>
+          
+          <p> upload data</p>
+        <input className='img--file' name='dt' id='dt' type="file" onChange={handleFileChange} accept="image/*" />
+            </>}
+         
+        {previewUrl && (
+          <div>
+            {file.type.includes('image') ? (
+              <img src={previewUrl} alt="Preview" style={{ maxWidth: '100%' }} />
+            ) : (
+              <video controls>
+                <source src={previewUrl} type={file.type} />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
+        )}
+      </div>
+        <div className="textBox">
+          <div className='grid  with-gap' style={{marginBlock:'20px',    width: "95%",
+    marginInline: "auto"}}>
+          <label htmlFor="">Title</label>
+          <input type="text" name="" id="" defaultValue={data.title} onChange={(e)=>{handleData(e.target.value,'title')}}/>
+          </div>
+          <div className='grid  with-gap' style={{marginBlock:'20px',    width: "95%",
+    marginInline: "auto"}}>
+          <label htmlFor="">price</label>
+          <input type="number" name="" id="" defaultValue={data.price} onChange={(e)=>{handleData(parseInt(e.target.value),'price')}} />
+          </div>
+          <div className='grid  with-gap' style={{marginBlock:'20px',    width: "95%",marginInline:'auto'}}>
+          <select    name="" id="" onChange={(e)=>{handleData(e.target.value,'type')}}>
+          <option value="home">منزل</option>
+          <option value="">مطبخ</option>
+          <option value="">مكتب</option>
+          <option value="">اخرى</option>
+        </select>
+          </div>
+         
+          
+          
+        </div>
+        <div className="btns">
+      <button className='send' onClick={()=>{send()}}>send</button>
+      </div>
+      </div>
+      
+      
+      </>
+    )
+}
+
+export default WebsitePost
