@@ -4,12 +4,14 @@ const cloudinaryDelete = require('../utils/cloudinaryDelete')
 const Product = require('../models/Product')
 const addVisit = async(req,res)=>{
     try {
-        const user = await user.find()
-        const data = {
-            ...user._doc,
-            number :user.number +1
-        }
-        await visits.updateOne({$set:data})
+      const user =await User.find()
+      console.log(user);
+      const dt = {
+        visits:user[0].visits +1,
+        totalSalery:user[0].totalSalery ,
+        totalCustomers:user[0].totalCustomers 
+      }
+        await user[0].updateOne({$set:dt})
         res.status(200).json('visits haS been updated')
       } catch (error) {
        res.status(500).json(error)
