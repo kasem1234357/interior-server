@@ -8,7 +8,7 @@ const useTable = (steps) => {
   const [searchIn, setSearchIn] = useState('id');
   const [searchQuery, setSearchQuery] = useState("");
   const [orderMode, setOrderMode] = useState("desc");
-  const [recordsLength, setRecordsLength] = useState(10);
+  const [recordsLength, setRecordsLength] = useState(100);
 
   /**
    * @desc This function using to move one step.
