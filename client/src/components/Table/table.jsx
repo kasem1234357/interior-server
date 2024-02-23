@@ -11,7 +11,7 @@ function TableBox() {
   const [productsData,setProductsData]=useState([])
   const [filterProducts,setFilterProducts]=useState([])
   const [showModel,setShowModel] = useState(false)
-  const {currentStep,recordsLength,setRecordsLength,toBack,skipsLength,toNext,steps} = useTable(10)
+  const {currentStep,recordsLength,setRecordsLength,toBack,skipsLength,toNext,steps} = useTable(1)
   
   const filter =useCallback((method,filterText)=>{
     const data = productsData.filter(task => task[method].includes(filterText))
