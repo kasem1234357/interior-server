@@ -4,7 +4,7 @@ function WebsitePost() {
     const [data,setData]=useState({
         title:'',
         price:"",
-        type:''
+        type:'home'
     })
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState('');
