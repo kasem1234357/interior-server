@@ -30,10 +30,10 @@ function WebsitePost() {
       }
     };
     const send = ()=>{
-      axios.post ('https://interior-server-xxlm.onrender.com/api/user/images',{
+      axios.post ('http://localhost:8800/api/user/images',{
         imgData:previewUrl
       }).then(res =>{
-        axios.post('https://interior-server-xxlm.onrender.com/api/user/post',{
+        axios.post('http://localhost:8800/api/user/post',{
           imgUrl:res.data.url,
           ...data
           
@@ -78,9 +78,9 @@ function WebsitePost() {
           <div className='grid  with-gap' style={{marginBlock:'20px',    width: "95%",marginInline:'auto'}}>
           <select    name="" id="" onChange={(e)=>{handleData(e.target.value,'type')}}>
           <option value="home">منزل</option>
-          <option value="restaurant">مطبخ</option>
-          <option value="office">مكتب</option>
-          <option value="other">اخرى</option>
+          <option value="">مطبخ</option>
+          <option value="">مكتب</option>
+          <option value="">اخرى</option>
         </select>
           </div>
          

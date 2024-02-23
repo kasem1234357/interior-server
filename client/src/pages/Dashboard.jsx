@@ -7,7 +7,7 @@ import axios from 'axios'
 function Dashboard() {
   const [data,setData] = useState({})
   useEffect(()=>{
-    axios.get('https://interior-server-xxlm.onrender.com/api/user').then(res =>{
+    axios.get('http://localhost:8800/api/user').then(res =>{
       setData(res.data[0])
     })
   },[])

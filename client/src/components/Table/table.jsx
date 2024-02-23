@@ -4,6 +4,7 @@ import FilterBox from '../Boxes/filtrerBox/FilterBox'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import '../../styles/crud.css'
+import axiosConfig from '../../configs/axiosConfig'
 import PaginationBox from '../Boxes/paginationBox/PaginationBox'
 import useTable from '../../hooks/useTable'
 function TableBox() {
@@ -16,9 +17,17 @@ function TableBox() {
     const data = productsData.filter(task => task[method].includes(filterText))
     setFilterProducts(data)
   },[productsData])
+  
   useEffect(()=>{
-    setFilterProducts(productsData)
- },[productsData])
+    axiosConfig.get('https://interior-server-xxlm.onrender.com/api/user/post').then(res =>{
+      setProductsData(res.data.products)
+      setFilterProducts(res.data.products)
+      console.log(res.data);
+    }).catch(err=>{
+      console.log(err);
+    })
+    
+ },[])
   return (
     <div>
        <div className="crud__table">
@@ -34,11 +43,9 @@ function TableBox() {
         <div className="table__header">
     
     <div className="crud__table__row crud__table__titles flex">
-      <div className="products--box product--Name">
-        user Name
+    <div className="products--box product--image">
+        profile
       </div>
-
-      <div className="products--box product--count">Number</div>
       <div className="products--box product--copon">price</div>
       <div className="products--box product--controls">
       Type
@@ -47,96 +54,18 @@ function TableBox() {
     </div>
     </div>
     <div className="crud__rows">
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
+      {filterProducts?.map(product =>(
+        <div className="crud__table__row  flex" 
+        style={{paddingBlock:'20px'}}>
+     <div className="products--box product--image">
+      <img src={product.imgUrl} alt="" srcset="" />
+      
     </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
-    <div className="crud__table__row  flex" 
-          style={{paddingBlock:'20px'}}>
-
-      <div className="products--box product--Name">user 1</div>
-
-      <div className="products--box product--price">0994035074</div>
-      <div className="products--box product--count">300$</div>
-      <div className="products--box product--copon">decor</div>
-    </div>
+    <div className="products--box product--count">{product.price}</div>
+    <div className="products--box product--copon">{product.type}</div>
+  </div>
+      ))}
+    
     
 
     </div>

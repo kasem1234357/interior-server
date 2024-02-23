@@ -5,7 +5,7 @@ import axios from 'axios'
 function Main() {
     const [data,setData]= useState([])
     useEffect(()=>{
-     axios.get('https://interior-server-xxlm.onrender.com/api/user/post').then(res =>{
+     axios.get('http://localhost:8800/api/user/post').then(res =>{
       setData(res.data)
      })
     },[])
