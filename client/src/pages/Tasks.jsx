@@ -26,7 +26,7 @@ function Tasks() {
   const [filterData, setFilterData] = useState([]);
   const [filterModel, setFilterModel] = useState(false);
   const [sortModel, setSortModel] = useState(false);
-  const [viewType,setViewType] = useState('board')
+  const [viewType,setViewType] = useState('list')
 
   const filter = useCallback((method, filterText) => {
     const data = tasksData.filter((task) => task[method].includes(filterText));
