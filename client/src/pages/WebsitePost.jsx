@@ -78,7 +78,7 @@ function WebsitePost() {
           <div className='grid  with-gap' style={{marginBlock:'20px',    width: "95%",marginInline:'auto'}}>
           <select    name="" id="" onChange={(e)=>{handleData(e.target.value,'type')}}>
           <option value="home">منزل</option>
-          <option value="resturant">مطبخ</option>
+          <option value="restaurant">مطبخ</option>
           <option value="office">مكتب</option>
           <option value="other">اخرى</option>
         </select>
