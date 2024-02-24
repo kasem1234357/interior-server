@@ -170,6 +170,7 @@ ul {
     box-shadow: 4px 4px 16px rgba(0, 0, 0,0.5);
     background: #415a77;
     transition: 0.5s;
+    height:min-content;
 }
 .postBox:hover{
     transform: scale(1.04);
