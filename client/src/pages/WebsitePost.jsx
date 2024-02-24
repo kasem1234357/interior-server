@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 function WebsitePost() {
     const [data,setData]=useState({
@@ -17,6 +18,7 @@ function WebsitePost() {
       [type]:dt
      })})
    }
+    const navigate = useNavigate();
     const handleFileChange = (event) => {
       const selectedFile = event.target.files[0];
       setFile(selectedFile);
@@ -39,7 +41,7 @@ function WebsitePost() {
           imgUrl:res.data.url,
           ...data
           
-        }).then(()=>{console.log('done'); setLoading(false)}).catch(()=>{console.log('error'); setLoading(false)})
+        }).then(()=>{console.log('done'); setLoading(false) navigate('/')}).catch(()=>{console.log('error'); setLoading(false)})
       }).catch(()=>{console.log('error'); setLoading(false)})
     }
     return (
