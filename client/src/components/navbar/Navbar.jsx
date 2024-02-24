@@ -4,7 +4,7 @@ import Logo from './logo2.jpg'
 import { Link, NavLink } from 'react-router-dom'
 import { BackArrow, Menu, ReturnBack } from '../../icons/SvgIcons'
 function Navbar() {
-  const [close,setClose]=useState(false)
+  const [close,setClose]=useState(true)
   return (
     <div className={`navbar ${close?'hide--navbar':''}`}>
       <svg onClick={()=>setClose(true)} className='close--navbar--icon' width={'20px'} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill='#d7d7d7'><path d="M12.4 18.2c0-.4-.1-.7-.4-.9L7.4 13c-.5-.5-.5-1.4 0-1.9L12 6.8c.3-.2.4-.6.4-.9 0-1.1-1.3-1.7-2.1-.9l-6.8 6.2c-.6.5-.6 1.4 0 1.9l6.8 6.2c.8.5 2.1-.1 2.1-1.1zM20.4 18.2c0-.4-.1-.7-.4-.9L15.4 13c-.5-.5-.5-1.4 0-1.9L20 6.8c.3-.2.4-.6.4-.9 0-1.1-1.3-1.7-2.1-.9l-6.8 6.2c-.6.5-.6 1.4 0 1.9l6.8 6.2c.8.5 2.1-.1 2.1-1.1z"></path></g></svg>
