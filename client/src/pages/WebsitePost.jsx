@@ -6,6 +6,7 @@ function WebsitePost() {
         price:"",
         type:'home'
     })
+    const [loading,setLoading]=useState(false)
     const [file, setFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState('');
 
@@ -30,6 +31,7 @@ function WebsitePost() {
       }
     };
     const send = ()=>{
+        setLoading(true)
       axios.post ('https://interior-server-xxlm.onrender.com/api/user/images',{
         imgData:previewUrl
       }).then(res =>{
@@ -37,8 +39,8 @@ function WebsitePost() {
           imgUrl:res.data.url,
           ...data
           
-        }).then(()=>{console.log('done');}).catch(()=>{console.log('error');})
-      }).catch(()=>{console.log('error');})
+        }).then(()=>{console.log('done'); setLoading(false)}).catch(()=>{console.log('error'); setLoading(false)})
+      }).catch(()=>{console.log('error'); setLoading(false)})
     }
     return (
       <>
@@ -88,7 +90,7 @@ function WebsitePost() {
           
         </div>
         <div className="btns">
-      <button className='send' onClick={()=>{send()}}>send</button>
+      <button className='send' onClick={()=>{!loading &&send()}}>{loading?'loading..':'send'}</button>
       </div>
       </div>
       
